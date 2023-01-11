@@ -1,3 +1,4 @@
+import 'package:dm_tool/common/styles/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class ExamplePage extends StatelessWidget {
@@ -6,7 +7,7 @@ class ExamplePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: $styles.colors.deepDark,
     );
   }
 }

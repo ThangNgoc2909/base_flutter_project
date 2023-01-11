@@ -40,6 +40,9 @@ dependencies:
   #routes
   auto_route: ^5.0.4
 
+  #localStorage
+  shared_preferences: ^2.0.15
+
   #responsive
   flutter_screenutil: ^5.6.0
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class AppColors {
   ///primary
   final Color deepDark = const Color(0xFF181818);

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_styles.dart';
 
+final $textStyle = AppTextStyle();
+
 class AppTextStyle {
   ///w300
   final TextStyle typos13w300 = TextStyle(
