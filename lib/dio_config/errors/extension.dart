@@ -25,7 +25,7 @@ extension DioErrorMessage on DioError {
         break;
       default:
         final data = ErrorResponse.fromJson(response?.data);
-        errorMessage = data.errorMessage ?? "something went wrong!";
+        errorMessage = data.message ?? "something went wrong!";
         break;
     }
     return errorMessage;

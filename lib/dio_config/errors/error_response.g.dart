@@ -8,14 +8,16 @@ part of 'error_response.dart';
 
 _$_ErrorResponse _$$_ErrorResponseFromJson(Map<String, dynamic> json) =>
     _$_ErrorResponse(
-      statusCode: json['statusCode'] as int?,
-      errorMessage: json['errorMessage'] as String?,
-      error: json['error'] as String?,
+      message: json['message'] as String?,
+      code: json['code'] as int?,
+      data: json['data'],
+      status: json['status'] as int?,
     );
 
 Map<String, dynamic> _$$_ErrorResponseToJson(_$_ErrorResponse instance) =>
     <String, dynamic>{
-      'statusCode': instance.statusCode,
-      'errorMessage': instance.errorMessage,
-      'error': instance.error,
+      'message': instance.message,
+      'code': instance.code,
+      'data': instance.data,
+      'status': instance.status,
     };
