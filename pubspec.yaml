@@ -1,0 +1,66 @@
+name: base_project
+description: A new Flutter project.
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.5 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  #state management
+  flutter_bloc: ^8.1.2
+
+  #network
+  dio: ^5.1.1
+
+  #dependency injection
+  get_it: ^7.2.0
+
+  #route
+  auto_route: ^6.3.0
+
+  #other
+  flutter_svg: ^2.0.5
+  flutter_gen: ^5.2.0
+  dartz: ^0.10.1 #error handling
+  gap: ^2.0.1 #empty space between widgets
+  equatable: ^2.0.5
+  cached_network_image: ^3.2.3 #image cache
+  syncfusion_flutter_datepicker: ^21.1.41 #datepicker
+  intl: ^0.18.1
+  logger: ^1.3.0 #beautiful log
+  flutter_config: ^2.0.0 #flutter_config_environment
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
+  flutter_gen_runner: ^5.2.0
+  auto_route_generator: ^6.2.0
+  json_serializable: ^6.6.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - .env
+    - .env.production
+    - .env.staging
+
+  fonts:
+    - family: Helvetica Neu
+      fonts:
+        - asset: assets/fonts/Helvetica Neu Bold.ttf
+          weight: 700
+        - asset: assets/fonts/HelveticaNeue.ttf
+          weight: 400
+        - asset: assets/fonts/HelveticaNeue Medium.ttf
+          weight: 500
+        - asset: assets/fonts/HelveticaNeue Thin.ttf
+          weight: 300
