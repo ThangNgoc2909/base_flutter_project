@@ -1,47 +1,69 @@
-import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:developer' as dev;
+import '../config/log_config.dart';
 
 class LogUtils {
-  final bool showLog = kDebugMode;
+  const LogUtils._();
 
-  // final bool showLog = kDebugMode && kReleaseMode; //For test notification
+  static const _enableLog = LogConfig.enableGeneralLog;
 
-  final _logger = Logger(
-    printer: PrettyPrinter(),
-  );
+  static void d(
+    Object? message, {
+    String? name,
+    DateTime? time,
+  }) {
+    _log('💡 $message', name: name ?? '', time: time);
+  }
 
-  void debugNormal(String text) {
-    if (showLog) {
-      // ignore: avoid_print
-      print("==========================================================");
-      // ignore: avoid_print
-      print("Logs Debug: $text");
-      // ignore: avoid_print
-      print("==========================================================");
+  static void e(
+    Object? errorMessage, {
+    String? name,
+    Object? errorObject,
+    StackTrace? stackTrace,
+    DateTime? time,
+  }) {
+    _log(
+      '💢 $errorMessage',
+      name: name ?? '',
+      error: errorObject,
+      stackTrace: stackTrace,
+      time: time,
+    );
+  }
+
+  static String prettyJson(Map<String, dynamic> json) {
+    if (!LogConfig.isPrettyJson) {
+      return json.toString();
     }
+
+    final indent = '  ' * 2;
+    final encoder = JsonEncoder.withIndent(indent);
+
+    return encoder.convert(json);
   }
 
-  void logV(String text) {
-    if (showLog) _logger.v(text);
-  }
-
-  void logD(String text) {
-    if (showLog) _logger.d(text);
-  }
-
-  void logI(String text) {
-    if (showLog) _logger.i(text);
-  }
-
-  void logW(String text) {
-    if (showLog) _logger.w(text);
-  }
-
-  void logE(String text) {
-    if (showLog) _logger.e(text);
-  }
-
-  void logWtf(String text) {
-    if (showLog) _logger.wtf(text);
+  static void _log(
+    String message, {
+    int level = 0,
+    String name = '',
+    DateTime? time,
+    int? sequenceNumber,
+    Zone? zone,
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
+    if (_enableLog) {
+      dev.log(
+        message,
+        name: name,
+        time: time,
+        sequenceNumber: sequenceNumber,
+        level: level,
+        zone: zone,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
   }
 }
