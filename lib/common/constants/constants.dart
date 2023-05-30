@@ -1,6 +1,6 @@
-class Constants {
-  static const double designWidth = 414;
-  static const double designHeight = 896;
+class DeviceConstants {
+  static const double designDeviceWidth = 414;
+  static const double designDeviceHeight = 896;
 }
 
 class PrefKeys {

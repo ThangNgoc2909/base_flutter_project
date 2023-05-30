@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_bloc/flutter_bloc.dart';
 // import '../../injector.dart';
-// import '../base_bloc/base_bloc.dart';
+// import '../base_bloc/base_cubit.dart';
 // import '../base_bloc/base_state.dart';
 //
 // abstract class BaseState<W extends StatefulWidget, E, S extends BaseBlocState,

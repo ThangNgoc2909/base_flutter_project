@@ -39,6 +39,8 @@ dependencies:
   freezed_annotation: ^2.2.0
   dartx: ^1.1.0
   injectable: ^2.1.1
+  flutter_screenutil: 5.7.0 #A flutter plugin for adapting screen and font size.Let your UI display a reasonable layout on different screen sizes
+  rxdart: ^0.27.7
 
   #local storage
   shared_preferences: ^2.1.1
