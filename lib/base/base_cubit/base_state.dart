@@ -1,44 +1,46 @@
+import 'package:base_project/my_app/presentation/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+import '../../dio_config/exceptions/exception_handler/exception_handler.dart';
+import '../../dio_config/exceptions/exception_handler/exception_message_mapper.dart';
+import '../../navigation/app_navigator.dart';
+import '../app_exception.dart';
+import '../app_exception_wrapper.dart';
+import '../common_cubit/common_cubit.dart';
+import '../common_cubit/common_state.dart';
+import 'base_cubit.dart';
 
-abstract class BasePageState<T extends StatefulWidget, B extends BaseBloc>
-    extends BasePageStateDelegate<T, B> with LogMixin {}
+abstract class BasePageState<T extends StatefulWidget, B extends BaseCubit>
+    extends BasePageStateDelegate<T, B> {}
 
 abstract class BasePageStateDelegate<T extends StatefulWidget,
-    B extends BaseBloc> extends State<T> implements ExceptionHandlerListener {
+    B extends BaseCubit> extends State<T> implements ExceptionHandlerListener {
   late final AppNavigator navigator = GetIt.instance.get<AppNavigator>();
-  late final AppBloc appBloc = GetIt.instance.get<AppBloc>();
+  late final AppCubit appCubit = GetIt.instance.get<AppCubit>();
   late final ExceptionMessageMapper exceptionMessageMapper =
-      const ExceptionMessageMapper();
+  const ExceptionMessageMapper();
   late final ExceptionHandler exceptionHandler = ExceptionHandler(
     navigator: navigator,
     listener: this,
   );
 
-  late final CommonBloc commonBloc = GetIt.instance.get<CommonBloc>()
+  late final CommonCubit commonBloc = GetIt.instance.get<CommonCubit>()
     ..navigator = navigator
-    ..disposeBag = disposeBag
-    ..appBloc = appBloc
-    ..exceptionHandler = exceptionHandler
-    ..exceptionMessageMapper = exceptionMessageMapper;
+    ..appCubit = appCubit
+    ..exceptionHandler = exceptionHandler;
 
   late final B bloc = GetIt.instance.get<B>()
     ..navigator = navigator
-    ..disposeBag = disposeBag
-    ..appBloc = appBloc
+    ..appCubit = appCubit
     ..commonBloc = commonBloc
-    ..exceptionHandler = exceptionHandler
-    ..exceptionMessageMapper = exceptionMessageMapper;
-
-  late final DisposeBag disposeBag = DisposeBag();
+    ..exceptionHandler = exceptionHandler;
 
   bool get isAppWidget => false;
 
   @override
   Widget build(BuildContext context) {
-    if (!isAppWidget) {
-      AppDimen.of(context);
-      AppColors.of(context);
-    }
 
     return Provider(
       create: (context) => navigator,
@@ -47,7 +49,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
           BlocProvider(create: (_) => bloc),
           BlocProvider(create: (_) => commonBloc),
         ],
-        child: BlocListener<CommonBloc, CommonState>(
+        child: BlocListener<CommonCubit, CommonState>(
           listenWhen: (previous, current) =>
               previous.appExceptionWrapper != current.appExceptionWrapper &&
               current.appExceptionWrapper != null,
@@ -60,7 +62,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
                 : Stack(
                     children: [
                       buildPage(context),
-                      BlocBuilder<CommonBloc, CommonState>(
+                      BlocBuilder<CommonCubit, CommonState>(
                         buildWhen: (previous, current) =>
                             previous.isLoading != current.isLoading,
                         builder: (context, state) => Visibility(
@@ -87,7 +89,6 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
   @override
   void dispose() {
     super.dispose();
-    disposeBag.dispose();
   }
 
   void handleException(AppExceptionWrapper appExceptionWrapper) {
@@ -107,6 +108,6 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
 
   @override
   void onRefreshTokenFailed() {
-    commonBloc.add(const ForceLogoutButtonPressed());
+    // commonBloc.add(const ForceLogoutButtonPressed());
   }
 }

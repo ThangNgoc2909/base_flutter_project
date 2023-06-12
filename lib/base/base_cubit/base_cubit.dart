@@ -1,4 +1,14 @@
+import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../dio_config/exceptions/exception_handler/exception_handler.dart';
+import '../../dio_config/exceptions/remote/remote_exceptions.dart';
+import '../../my_app/presentation/cubit/app_cubit.dart';
+import '../../navigation/app_navigator.dart';
+import '../app_exception.dart';
+import '../app_exception_wrapper.dart';
+import '../common_cubit/common_cubit.dart';
+import 'mixin/event_transformer_mixin.dart';
+import 'mixin/log_mixin.dart';
 
 abstract class BaseCubit<S> extends BaseCubitDelegate<S>
     with EventTransformerMixin, LogMixin {
@@ -9,42 +19,33 @@ abstract class BaseCubitDelegate<S> extends Cubit<S> {
   BaseCubitDelegate(S initialState) : super(initialState);
 
   late final AppNavigator navigator;
-  late final AppBloc appBloc;
+  late final AppCubit appCubit;
   late final ExceptionHandler exceptionHandler;
-  late final ExceptionMessageMapper exceptionMessageMapper;
-  late final DisposeBag disposeBag;
-  late final CommonBloc _commonBloc;
+  late final CommonCubit _commonCubit;
 
-  set commonBloc(CommonBloc commonBloc) {
-    _commonBloc = commonBloc;
+  set commonBloc(CommonCubit commonCubit) {
+    _commonCubit = commonCubit;
   }
 
-  CommonBloc get commonBloc =>
-      this is CommonBloc ? this as CommonBloc : _commonBloc;
-
-  @override
-  void add(E event) {
-    if (!isClosed) {
-      super.add(event);
-    } else {
-      Log.e('Cannot add new event $event because $runtimeType was closed');
-    }
-  }
+  CommonCubit get commonBloc =>
+      this is CommonCubit ? this as CommonCubit : _commonCubit;
 
   Future<void> addException(AppExceptionWrapper appExceptionWrapper) async {
-    commonBloc.add(ExceptionEmitted(
-      appExceptionWrapper: appExceptionWrapper,
-    ));
+    // commonBloc.add(
+    //   ExceptionEmitted(
+    //     appExceptionWrapper: appExceptionWrapper,
+    //   ),
+    // );
 
     return appExceptionWrapper.exceptionCompleter?.future;
   }
 
   void showLoading() {
-    commonBloc.add(const LoadingVisibilityEmitted(isLoading: true));
+    // commonBloc.add(const LoadingVisibilityEmitted(isLoading: true));
   }
 
   void hideLoading() {
-    commonBloc.add(const LoadingVisibilityEmitted(isLoading: false));
+    // commonBloc.add(const LoadingVisibilityEmitted(isLoading: false));
   }
 
   Future<void> runBlocCatching({

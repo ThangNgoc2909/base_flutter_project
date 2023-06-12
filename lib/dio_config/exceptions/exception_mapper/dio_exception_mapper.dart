@@ -62,6 +62,8 @@ class DioExceptionMapper extends ExceptionMapper<RemoteException> {
       }
     }
     return RemoteException(
-        kind: RemoteExceptionKind.unknown, rootException: exception);
+      kind: RemoteExceptionKind.unknown,
+      rootException: exception,
+    );
   }
 }

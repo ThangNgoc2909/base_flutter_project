@@ -33,6 +33,7 @@ dependencies:
   intl: ^0.18.1
   logger: ^1.3.0 #beautiful log
   flutter_config: ^2.0.0 #flutter_config_environment
+  provider: ^6.0.5
 
   connectivity_plus: ^4.0.1 #Discover network connectivity and configure themselves accordingly
   freezed: ^2.3.4

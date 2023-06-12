@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'helper/run_catching/run_catching.dart';
 import 'injector/injector.dart';
+import 'my_app/presentation/my_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,20 +13,10 @@ Future<void> main() async {
   await runZonedGuarded(_runMyApp, _reportError);
 }
 
-Future<LoadInitialResourceOutput> _loadInitialResource() async {
-  final result = runCatching(
-    action: () =>
-        GetIt.instance.get<LoadInitialResourceUseCase>().execute(const LoadInitialResourceInput()),
-  );
-
-  return result.when(
-    success: (output) => output,
-    failure: (e) => const LoadInitialResourceOutput(),
-  );
-}
+FutureOr loadInitialResource() {}
 
 Future<void> _runMyApp() async {
-  final initialResource = await _loadInitialResource();
+  final initialResource = await loadInitialResource();
   runApp(MyApp(initialResource: initialResource));
 }
 

@@ -4,16 +4,23 @@ class DeviceConstants {
 }
 
 class PrefKeys {
-  static const String TOKEN = 'TOKEN';
-  static const String FIREBASE_TOKEN = 'FIREBASE_TOKEN';
-  static const String COUNTRY_CODE = 'COUNTRY_CODE';
-  static const String LANGUAGE_CODE = 'LANGUAGE_CODE';
-  static const String CUSTOMER = 'CUSTOMER';
+  static const String token = 'token';
+  static const String firebaseToken = 'firebaseToken';
+  static const String countryCode = 'countryCode';
+  static const String customer = 'customer';
+  static const languageCode = 'languageCode';
+  static const accessToken = 'accessToken';
+  static const refreshToken = 'refreshToken';
+  static const currentUser = 'currentUser';
+  static const isDarkMode = 'isDarkMode';
+  static const deviceToken = 'deviceToken';
+  static const isFirstLogin = 'isFirstLogin';
+  static const isFirstLaunchApp = 'isFirstLaunchApp';
 
   ///account_id
-  static const String USER = 'USER';
-  static const String PROFILE = 'PROFILE';
-  static const String WAREHOUSE = 'WAREHOUSE';
-  static const String KEY = 'AD';
-  static const String TOKEN_REFRESH = 'TOKEN_REFRESH';
+  static const String user = 'user';
+  static const String profile = 'profile';
+  static const String warehouse = 'warehouse';
+  static const String key = 'AD';
+  static const String tokenRefresh = 'tokenRefresh';
 }
