@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import '../../base/base_cubit/base_state.dart';
 import '../../common/constants/constants.dart';
 import '../../common/enums/enum.dart';
+import '../../navigation/app_navigation_observer.dart';
 import '../../router/app_router.dart';
 import '../../router/app_router.gr.dart';
 import 'cubit/app_cubit.dart';
@@ -42,7 +43,8 @@ class _MyAppState extends BasePageState<MyApp, AppCubit> {
           return MaterialApp.router(
             useInheritedMediaQuery: true,
             routerDelegate: _appRouter.delegate(
-              initialRoutes: _mapRouteToPageRouteInfo(),
+              initialRoutes:
+                  state.isLoggedIn ? [const LoginRoute()] : [const MainRoute()],
               navigatorObservers: () => [AppNavigatorObserver()],
             ),
             routeInformationParser: _appRouter.defaultRouteParser(),
@@ -51,17 +53,5 @@ class _MyAppState extends BasePageState<MyApp, AppCubit> {
         },
       ),
     );
-  }
-
-  List<PageRouteInfo> _mapRouteToPageRouteInfo(
-      LoadInitialResourceOutput initialResource) {
-    return initialResource.initialRoutes.map((e) {
-      switch (e) {
-        case AppRoute.login:
-          return const LoginRoute();
-        case AppRoute.home:
-          return const MainRoute();
-      }
-    }).toList(growable: false);
   }
 }

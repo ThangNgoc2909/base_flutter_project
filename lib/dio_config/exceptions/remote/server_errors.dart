@@ -15,6 +15,5 @@ class ServerError with _$ServerError {
 
     /// server-defined message
     String? message,
-    @Default(<ServerErrorDetail>[]) List<ServerErrorDetail> errors,
   }) = _ServerError;
 }

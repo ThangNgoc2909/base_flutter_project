@@ -6,7 +6,6 @@ import '../../my_app/presentation/cubit/app_cubit.dart';
 import '../../navigation/app_navigator.dart';
 import '../app_exception.dart';
 import '../app_exception_wrapper.dart';
-import '../common_cubit/common_cubit.dart';
 import 'mixin/event_transformer_mixin.dart';
 import 'mixin/log_mixin.dart';
 
@@ -21,14 +20,6 @@ abstract class BaseCubitDelegate<S> extends Cubit<S> {
   late final AppNavigator navigator;
   late final AppCubit appCubit;
   late final ExceptionHandler exceptionHandler;
-  late final CommonCubit _commonCubit;
-
-  set commonBloc(CommonCubit commonCubit) {
-    _commonCubit = commonCubit;
-  }
-
-  CommonCubit get commonBloc =>
-      this is CommonCubit ? this as CommonCubit : _commonCubit;
 
   Future<void> addException(AppExceptionWrapper appExceptionWrapper) async {
     // commonBloc.add(

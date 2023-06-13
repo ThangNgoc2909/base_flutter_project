@@ -17,8 +17,6 @@ class RestApiClient {
     this.interceptors = const [],
     this.errorResponseMapperType =
         ResponseMapperConstants.defaultErrorResponseMapperType,
-    this.successResponseMapperType =
-        ResponseMapperConstants.defaultSuccessResponseMapperType,
     this.connectTimeout = ServerTimeoutConstants.connectTimeout,
     this.sendTimeout = ServerTimeoutConstants.sendTimeout,
     this.receiveTimeout = ServerTimeoutConstants.receiveTimeout,
@@ -40,7 +38,6 @@ class RestApiClient {
     _dio.interceptors.addAll(sortedInterceptors);
   }
 
-  final SuccessResponseMapperType successResponseMapperType;
   final ErrorResponseMapperType errorResponseMapperType;
   final String baseUrl;
   final int connectTimeout;
@@ -55,7 +52,6 @@ class RestApiClient {
     Map<String, dynamic>? queryParameters,
     // ignore: avoid-dynamic
     dynamic body,
-    SuccessResponseMapperType? successResponseMapperType,
     ErrorResponseMapperType? errorResponseMapperType,
     BaseErrorResponseMapper? errorResponseMapper,
     Map<String, dynamic>? headers,
@@ -93,10 +89,6 @@ class RestApiClient {
             ),
       ).map(error);
     }
-  }
-
-  Future<Response<T>> fetch<T>(RequestOptions requestOptions) {
-    return _dio.fetch(requestOptions);
   }
 
   Future<Response> _requestByMethod({

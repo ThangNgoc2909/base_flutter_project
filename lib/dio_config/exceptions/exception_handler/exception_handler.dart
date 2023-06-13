@@ -1,9 +1,7 @@
-import '../../../base/app_exception.dart';
-import '../../../base/app_exception_wrapper.dart';
+import 'dart:ui';
 import '../../../common/constants/duration/duration_constants.dart';
 import '../../../navigation/app_navigator.dart';
 import '../../../navigation/app_popup_info.dart';
-import '../../../utils/function_utils.dart';
 import '../remote/remote_exceptions.dart';
 
 class ExceptionHandler {
@@ -15,48 +13,33 @@ class ExceptionHandler {
   final AppNavigator navigator;
   final ExceptionHandlerListener listener;
 
-  Future<void> handleException(
-      AppExceptionWrapper appExceptionWrapper,
-      String commonExceptionMessage,
-      ) async {
-    final message = appExceptionWrapper.overrideMessage ?? commonExceptionMessage;
+  Future<void> handleException(RemoteException exception) async {
+    final message = exception.kind;
 
-    switch (appExceptionWrapper.appException.appExceptionType) {
-      case AppExceptionType.remote:
-        final exception = appExceptionWrapper.appException as RemoteException;
-        switch (exception.kind) {
-          case RemoteExceptionKind.refreshTokenFailed:
-            await _showErrorDialog(
-              isRefreshTokenFailed: true,
-              message: message,
-              onPressed: Func0(() {
-                navigator.pop();
-              }),
-            );
-            break;
-          case RemoteExceptionKind.noInternet:
-          case RemoteExceptionKind.timeout:
-            await _showErrorDialogWithRetry(
-              message: message,
-              onRetryPressed: Func0(() async {
-                await navigator.pop();
-                await appExceptionWrapper.doOnRetry?.call();
-              }),
-            );
-            break;
-          default:
-            await _showErrorDialog(message: message);
-            break;
-        }
+    switch (message) {
+      case RemoteExceptionKind.noInternet:
+        // TODO: Handle this case.
         break;
-      case AppExceptionType.parse:
-        return _showErrorSnackBar(message: message);
-      case AppExceptionType.remoteConfig:
-        return _showErrorSnackBar(message: message);
-      case AppExceptionType.uncaught:
-        return;
-      case AppExceptionType.validation:
-        await _showErrorDialog(message: message);
+      case RemoteExceptionKind.network:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.serverDefined:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.serverUndefined:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.refreshTokenFailed:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.timeout:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.cancellation:
+        // TODO: Handle this case.
+        break;
+      case RemoteExceptionKind.unknown:
+        // TODO: Handle this case.
         break;
     }
   }
@@ -70,7 +53,7 @@ class ExceptionHandler {
 
   Future<void> _showErrorDialog({
     required String message,
-    Func0<void>? onPressed,
+    VoidCallback? onPressed,
     bool isRefreshTokenFailed = false,
   }) async {
     await navigator
@@ -87,7 +70,7 @@ class ExceptionHandler {
 
   Future<void> _showErrorDialogWithRetry({
     required String message,
-    required Func0<void>? onRetryPressed,
+    VoidCallback? onRetryPressed,
   }) async {
     await navigator.showDialog(AppPopupInfo.errorWithRetryDialog(
       message: message,

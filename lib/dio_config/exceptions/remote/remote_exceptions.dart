@@ -15,12 +15,7 @@ class RemoteException extends AppException {
   final ServerError? serverError;
   final Object? rootException;
 
-  int get statusCode =>
-      serverError?.statusCode ??
-      serverError?.errors
-          .firstWhere((element) => element.statusCode != -1)
-          .statusCode ??
-      -1;
+  int? get statusCode => serverError?.statusCode;
 
   int? get errorId => serverError?.errorId ?? -1;
 
@@ -43,13 +38,10 @@ class RemoteException extends AppException {
 
 enum RemoteExceptionKind {
   noInternet,
-
   /// host not found, cannot connect to host
   network,
-
   /// server has defined response
   serverDefined,
-
   /// server has not defined response
   serverUndefined,
   refreshTokenFailed,

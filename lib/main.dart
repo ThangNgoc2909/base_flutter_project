@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'package:base_project/utils/log_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'helper/run_catching/run_catching.dart';
 import 'injector/injector.dart';
 import 'my_app/presentation/my_app.dart';
 
@@ -13,11 +11,8 @@ Future<void> main() async {
   await runZonedGuarded(_runMyApp, _reportError);
 }
 
-FutureOr loadInitialResource() {}
-
 Future<void> _runMyApp() async {
-  final initialResource = await loadInitialResource();
-  runApp(MyApp(initialResource: initialResource));
+  runApp(const MyApp());
 }
 
 void _reportError(Object error, StackTrace stackTrace) {
