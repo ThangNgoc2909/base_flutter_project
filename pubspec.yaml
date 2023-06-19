@@ -62,6 +62,7 @@ flutter:
 
   assets:
     - assets/icons/
+    - assets/images/
     - .env
     - .env.production
     - .env.staging

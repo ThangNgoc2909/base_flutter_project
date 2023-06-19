@@ -5,7 +5,6 @@ import '../../dio_config/exceptions/remote/remote_exceptions.dart';
 import '../../my_app/presentation/cubit/app_cubit.dart';
 import '../../navigation/app_navigator.dart';
 import '../app_exception.dart';
-import '../app_exception_wrapper.dart';
 import 'mixin/event_transformer_mixin.dart';
 import 'mixin/log_mixin.dart';
 
@@ -21,88 +20,12 @@ abstract class BaseCubitDelegate<S> extends Cubit<S> {
   late final AppCubit appCubit;
   late final ExceptionHandler exceptionHandler;
 
-  Future<void> addException(AppExceptionWrapper appExceptionWrapper) async {
+  Future<void> handleException() async {
     // commonBloc.add(
     //   ExceptionEmitted(
     //     appExceptionWrapper: appExceptionWrapper,
     //   ),
     // );
-
-    return appExceptionWrapper.exceptionCompleter?.future;
-  }
-
-  void showLoading() {
-    // commonBloc.add(const LoadingVisibilityEmitted(isLoading: true));
-  }
-
-  void hideLoading() {
-    // commonBloc.add(const LoadingVisibilityEmitted(isLoading: false));
-  }
-
-  Future<void> runBlocCatching({
-    required Future<void> Function() action,
-    Future<void> Function()? doOnRetry,
-    Future<void> Function(AppException)? doOnError,
-    Future<void> Function()? doOnSubscribe,
-    Future<void> Function()? doOnSuccessOrError,
-    Future<void> Function()? doOnEventCompleted,
-    bool handleLoading = true,
-    bool handleError = true,
-    bool handleRetry = true,
-    bool Function(AppException)? forceHandleError,
-    String? overrideErrorMessage,
-  }) async {
-    Completer<void>? recursion;
-    try {
-      await doOnSubscribe?.call();
-      if (handleLoading) {
-        showLoading();
-      }
-
-      await action.call();
-
-      if (handleLoading) {
-        hideLoading();
-      }
-      await doOnSuccessOrError?.call();
-    } on AppException catch (e) {
-      if (handleLoading) {
-        hideLoading();
-      }
-      await doOnSuccessOrError?.call();
-      await doOnError?.call(e);
-
-      if (handleError || (forceHandleError?.call(e) ?? _forceHandleError(e))) {
-        await addException(AppExceptionWrapper(
-          appException: e,
-          doOnRetry: doOnRetry ??
-              (handleRetry
-                  ? () async {
-                      recursion = Completer();
-                      await runBlocCatching(
-                        action: action,
-                        doOnEventCompleted: doOnEventCompleted,
-                        doOnSubscribe: doOnSubscribe,
-                        doOnSuccessOrError: doOnSuccessOrError,
-                        doOnError: doOnError,
-                        doOnRetry: doOnRetry,
-                        forceHandleError: forceHandleError,
-                        handleError: handleError,
-                        handleLoading: handleLoading,
-                        handleRetry: handleRetry,
-                        overrideErrorMessage: overrideErrorMessage,
-                      );
-                      recursion?.complete();
-                    }
-                  : null),
-          exceptionCompleter: Completer<void>(),
-          overrideMessage: overrideErrorMessage,
-        ));
-      }
-    } finally {
-      await recursion?.future;
-      await doOnEventCompleted?.call();
-    }
   }
 
   bool _forceHandleError(AppException appException) {

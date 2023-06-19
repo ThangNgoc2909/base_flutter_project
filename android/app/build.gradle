@@ -52,7 +52,7 @@ android {
 
     defaultConfig {
         applicationId project.env.get("APP_ID")
-        minSdkVersion flutter.minSdkVersion
+        minSdkVersion 21
         targetSdkVersion flutter.targetSdkVersion
         versionCode project.env.get("VERSION_CODE").toInteger()
         versionName project.env.get("VER_NAME")

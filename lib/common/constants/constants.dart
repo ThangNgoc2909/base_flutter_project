@@ -24,3 +24,4 @@ class PrefKeys {
   static const String key = 'AD';
   static const String tokenRefresh = 'tokenRefresh';
 }
+

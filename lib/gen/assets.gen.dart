@@ -137,10 +137,21 @@ class $AssetsIconsGen {
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/lh_logo.png
+  AssetGenImage get lhLogo => const AssetGenImage('assets/images/lh_logo.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [lhLogo];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
