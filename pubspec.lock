@@ -193,14 +193,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
-  color:
-    dependency: transitive
-    description:
-      name: color
-      sha256: ddcdf1b3badd7008233f5acffaf20ca9f5dc2cd0172b75f68f24526a5f5725cb
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.0"
   connectivity_plus:
     dependency: "direct main"
     description:
@@ -358,30 +350,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  flutter_gen:
-    dependency: "direct main"
-    description:
-      name: flutter_gen
-      sha256: "2f132e85368a7b9b0649107f4e02799fef2e0e7f4ec1651df5f7c9a57148a7b2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.0"
-  flutter_gen_core:
-    dependency: transitive
-    description:
-      name: flutter_gen_core
-      sha256: "41ed478d2c1b77cb899b859c3705be02a76a3f03171c17b1d82af98068788763"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.0"
-  flutter_gen_runner:
-    dependency: "direct dev"
-    description:
-      name: flutter_gen_runner
-      sha256: a32f596f5c4f0d03ef950db2ec03b5d05f944d215accfd3e0494cf47113139fa
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.0"
   flutter_lints:
     dependency: "direct dev"
     description:

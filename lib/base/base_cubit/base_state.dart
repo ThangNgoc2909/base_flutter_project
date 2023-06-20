@@ -1,12 +1,12 @@
 import 'package:base_project/my_app/presentation/cubit/app_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import '../../common/common_cubit/common_cubit.dart';
 import '../../common/common_cubit/common_state.dart';
 import '../../dio_config/exceptions/exception_handler/exception_handler.dart';
 import '../../dio_config/exceptions/remote/remote_exceptions.dart';
+import '../../injector/injector.dart';
 import '../../navigation/app_navigator.dart';
 import 'base_cubit.dart';
 
@@ -15,24 +15,23 @@ abstract class BasePageState<T extends StatefulWidget, B extends BaseCubit>
 
 abstract class BasePageStateDelegate<T extends StatefulWidget,
     B extends BaseCubit> extends State<T> implements ExceptionHandlerListener {
-  late final AppNavigator navigator = GetIt.instance.get<AppNavigator>();
-  late final AppCubit appCubit = GetIt.instance.get<AppCubit>();
+  late final AppNavigator navigator = getIt.get<AppNavigator>();
+  late final AppCubit appCubit = getIt.get<AppCubit>();
   late final ExceptionHandler exceptionHandler = ExceptionHandler(
     navigator: navigator,
     listener: this,
   );
 
-  late final CommonCubit commonBloc = GetIt.instance.get<CommonCubit>()
+  late final CommonCubit commonBloc = getIt.get<CommonCubit>()
     ..navigator = navigator
     ..appCubit = appCubit
     ..exceptionHandler = exceptionHandler;
 
-  late final B bloc = GetIt.instance.get<B>()
+  late final B bloc = getIt.get<B>()
     ..navigator = navigator
     ..appCubit = appCubit
     ..exceptionHandler = exceptionHandler;
 
-  bool get isAppWidget => false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => bloc),
-          BlocProvider(create: (_) => appCubit),
+          BlocProvider(create: (_) => commonBloc),
         ],
         child: BlocListener<CommonCubit, CommonState>(
           listenWhen: (previous, current) =>
@@ -50,19 +49,7 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
           listener: (context, state) {
             handleException(state.exception!);
           },
-          child: Stack(
-            children: [
-              buildPage(context),
-              BlocBuilder<CommonCubit, CommonState>(
-                buildWhen: (previous, current) =>
-                    previous.isLoading != current.isLoading,
-                builder: (context, state) => Visibility(
-                  visible: state.isLoading,
-                  child: const CircularProgressIndicator(),
-                ),
-              ),
-            ],
-          ),
+          child: buildPage(context),
         ),
       ),
     );

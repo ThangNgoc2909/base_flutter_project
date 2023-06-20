@@ -4,7 +4,7 @@ import 'package:base_project/common/common_cubit/common_state.dart';
 import 'package:injectable/injectable.dart';
 import '../../navigation/app_route_info.dart';
 
-@LazySingleton()
+@Injectable()
 class CommonCubit extends BaseCubit<CommonState> {
   CommonCubit() : super(const CommonState());
 

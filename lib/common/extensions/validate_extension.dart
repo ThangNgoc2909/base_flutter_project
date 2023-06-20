@@ -1,0 +1,1 @@
+extension ValidateExtension on String {}

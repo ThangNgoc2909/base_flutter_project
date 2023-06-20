@@ -39,6 +39,4 @@ class AppNavigatorObserver extends NavigatorObserver with LogMixin {
       logD('didReplace ${oldRoute?.settings.name} by ${newRoute?.settings.name}');
     }
   }
-
-
 }
