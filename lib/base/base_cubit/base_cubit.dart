@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../dio_config/exceptions/exception_handler/exception_handler.dart';
 import '../../dio_config/exceptions/remote/remote_exceptions.dart';
 import '../../my_app/presentation/cubit/app_cubit.dart';
-import '../../navigation/app_navigator.dart';
+import '../../navigation/app_navigation/app_navigator.dart';
 import '../app_exception.dart';
 import 'mixin/event_transformer_mixin.dart';
 import 'mixin/log_mixin.dart';

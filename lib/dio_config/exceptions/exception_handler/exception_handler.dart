@@ -1,7 +1,7 @@
 import 'dart:ui';
 import '../../../common/constants/duration/duration_constants.dart';
-import '../../../navigation/app_navigator.dart';
-import '../../../navigation/app_popup_info.dart';
+import '../../../navigation/app_navigation/app_navigator.dart';
+import '../../../navigation/app_popup_info/app_popup_info.dart';
 import '../remote/remote_exceptions.dart';
 
 class ExceptionHandler {

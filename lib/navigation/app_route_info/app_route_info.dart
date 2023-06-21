@@ -7,4 +7,5 @@ part 'app_route_info.freezed.dart';
 class AppRouteInfo with _$AppRouteInfo {
   const factory AppRouteInfo.login() = _Login;
   const factory AppRouteInfo.main() = _Main;
+  const factory AppRouteInfo.register() = _Register;
 }

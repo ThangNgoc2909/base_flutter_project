@@ -1,5 +1,4 @@
 import 'package:base_project/common/constants/app_spacing.dart';
-import 'package:base_project/features/authentication/login/bloc/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,7 +6,8 @@ import 'package:gap/gap.dart';
 import '../../../../../common/constants/app_colors.dart';
 import '../../../../../common/constants/app_typography.dart';
 import '../../../../../common/widgets/textfield/validate_textfield.dart';
-import '../../bloc/login_cubit.dart';
+import '../bloc/login_cubit.dart';
+import '../bloc/login_state.dart';
 
 class BuildFormLogin extends StatefulWidget {
   final GlobalKey<FormState> formKey;

@@ -1,3 +1,5 @@
+import 'package:flutter_config/flutter_config.dart';
+
 class ServerTimeoutConstants {
   const ServerTimeoutConstants._();
 
@@ -10,9 +12,6 @@ class UrlConstants {
   const UrlConstants._();
 
   /// Url
-  static const firebaseStorageBaseUrl =
-      'https://firebasestorage.googleapis.com/';
-
   /// Path
   static const remoteConfigPath = '/config/RemoteConfig.json';
   static const settingsPath = '/mypage/settings';

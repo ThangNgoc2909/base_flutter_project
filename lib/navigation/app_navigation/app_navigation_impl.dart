@@ -2,14 +2,14 @@ import 'package:auto_route/auto_route.dart';
 import 'package:base_project/utils/snackbar_utils.dart';
 import 'package:flutter/material.dart' as m;
 import 'package:injectable/injectable.dart';
-import '../base/base_cubit/mixin/log_mixin.dart';
-import '../base/base_navigation/base_route_info_mapper.dart';
-import '../common/constants/duration/duration_constants.dart';
-import '../config/log_config.dart';
-import '../router/app_router.dart';
+import '../../base/base_cubit/mixin/log_mixin.dart';
+import '../../base/base_navigation/base_route_info_mapper.dart';
+import '../../common/constants/duration/duration_constants.dart';
+import '../../config/log_config.dart';
+import '../../router/app_router.dart';
 import 'app_navigator.dart';
-import 'app_popup_info.dart';
-import 'app_route_info.dart';
+import '../app_popup_info/app_popup_info.dart';
+import '../app_route_info/app_route_info.dart';
 
 @LazySingleton(as: AppNavigator)
 class AppNavigatorImpl extends AppNavigator with LogMixin {

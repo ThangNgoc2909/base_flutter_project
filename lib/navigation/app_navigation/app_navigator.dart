@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../common/constants/duration/duration_constants.dart';
-import 'app_popup_info.dart';
-import 'app_route_info.dart';
+import '../../common/constants/duration/duration_constants.dart';
+import '../app_popup_info/app_popup_info.dart';
+import '../app_route_info/app_route_info.dart';
 
 abstract class AppNavigator {
   const AppNavigator();

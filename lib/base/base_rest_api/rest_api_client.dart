@@ -1,19 +1,21 @@
 import 'package:dartx/dartx.dart';
 import 'package:dio/dio.dart';
-import '../common/constants/base_constants.dart';
-import '../common/constants/server/server_constants.dart';
-import '../dio_config/dio_builder.dart';
-import '../dio_config/exceptions/exception_mapper/dio_exception_mapper.dart';
-import '../shared/shared.dart';
-import 'api_client_default_settings.dart';
-import 'base_interceptor.dart';
-import 'base_mapper/base_error_response_mapper.dart';
+import 'package:flutter_config/flutter_config.dart';
+import 'package:injectable/injectable.dart';
+import '../../common/constants/base_constants.dart';
+import '../../common/constants/server/server_constants.dart';
+import '../../dio_config/dio_builder.dart';
+import '../../dio_config/exceptions/exception_mapper/dio_exception_mapper.dart';
+import '../../shared/shared.dart';
+import '../api_client_default_settings.dart';
+import '../base_interceptor.dart';
+import '../base_mapper/base_error_response_mapper.dart';
 
 enum RestMethod { get, post, put, patch, delete }
 
 class RestApiClient {
   RestApiClient({
-    this.baseUrl = '',
+    this.baseUrl = "",
     this.interceptors = const [],
     this.errorResponseMapperType =
         ResponseMapperConstants.defaultErrorResponseMapperType,
@@ -89,6 +91,10 @@ class RestApiClient {
             ),
       ).map(error);
     }
+  }
+
+  Future<Response<T>> fetch<T>(RequestOptions requestOptions) {
+    return _dio.fetch(requestOptions);
   }
 
   Future<Response> _requestByMethod({

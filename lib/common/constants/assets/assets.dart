@@ -58,7 +58,7 @@ class Assets {
     );
   }
 
-  static SvgPicture svg({
+  static SvgPicture icon({
     Key? key,
     required String assetName,
     bool matchTextDirection = false,

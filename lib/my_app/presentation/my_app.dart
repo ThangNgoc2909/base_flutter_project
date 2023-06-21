@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../base/base_cubit/base_state.dart';
 import '../../common/constants/constants.dart';
-import '../../navigation/app_navigation_observer.dart';
+import '../../navigation/app_navigation/app_navigation_observer.dart';
 import '../../router/app_router.dart';
 import '../../router/app_router.gr.dart';
 import 'cubit/app_cubit.dart';
@@ -19,9 +19,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends BasePageState<MyApp, AppCubit> {
   final _appRouter = getIt.get<AppRouter>();
-
-  @override
-  bool get isAppWidget => true;
 
   @override
   void initState() {
@@ -39,10 +36,10 @@ class _MyAppState extends BasePageState<MyApp, AppCubit> {
       builder: (context, _) => BlocBuilder<AppCubit, AppState>(
         builder: (context, state) {
           return MaterialApp.router(
-            useInheritedMediaQuery: true,
             routerDelegate: _appRouter.delegate(
-              initialRoutes:
-                  !state.isLoggedIn ? [const LoginRoute()] : [const MainRoute()],
+              initialRoutes: !state.isLoggedIn
+                  ? [const LoginRoute()]
+                  : [const MainRoute()],
               navigatorObservers: () => [AppNavigatorObserver()],
             ),
             routeInformationParser: _appRouter.defaultRouteParser(),

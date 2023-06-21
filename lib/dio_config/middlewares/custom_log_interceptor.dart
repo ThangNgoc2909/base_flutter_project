@@ -29,26 +29,26 @@ class CustomLogInterceptor extends BaseInterceptor {
 
     final log = <String>[];
     log.add('************ Request ************');
-    log.add('🌐 Request: ${options.method} ${options.uri}');
+    log.add('🐶 Request: ${options.method} ${options.uri}');
     if (options.headers.isNotEmpty) {
-      log.add('🌐 Request Headers:');
-      log.add('🌐 ${_prettyResponse(options.headers)}');
+      log.add('🐶 Request Headers:');
+      log.add('🐶 ${_prettyResponse(options.headers)}');
     }
 
     if (options.data != null) {
-      log.add('🌐 Request Body:');
+      log.add('🐶 Request Body:');
       if (options.data is FormData) {
         final data = options.data as FormData;
         if (data.fields.isNotEmpty) {
-          log.add('🌐 Fields: ${_prettyResponse(data.fields)}');
+          log.add('🐶 Fields: ${_prettyResponse(data.fields)}');
         }
         if (data.files.isNotEmpty) {
           log.add(
-            '🌐 Files: ${_prettyResponse(data.files.map((e) => MapEntry(e.key, 'File name: ${e.value.filename}, Content type: ${e.value.contentType}, Length: ${e.value.length}')))}',
+            '🐶 Files: ${_prettyResponse(data.files.map((e) => MapEntry(e.key, 'File name: ${e.value.filename}, Content type: ${e.value.contentType}, Length: ${e.value.length}')))}',
           );
         }
       } else {
-        log.add('🌐 ${_prettyResponse(options.data)}');
+        log.add('🐶 ${_prettyResponse(options.data)}');
       }
     }
 

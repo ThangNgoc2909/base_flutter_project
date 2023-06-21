@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import '../../navigation/app_route_info.dart';
+import '../../navigation/app_route_info/app_route_info.dart';
 
 abstract class BaseRouteInfoMapper {
   PageRouteInfo map(AppRouteInfo appRouteInfo);

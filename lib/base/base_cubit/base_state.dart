@@ -7,7 +7,7 @@ import '../../common/common_cubit/common_state.dart';
 import '../../dio_config/exceptions/exception_handler/exception_handler.dart';
 import '../../dio_config/exceptions/remote/remote_exceptions.dart';
 import '../../injector/injector.dart';
-import '../../navigation/app_navigator.dart';
+import '../../navigation/app_navigation/app_navigator.dart';
 import 'base_cubit.dart';
 
 abstract class BasePageState<T extends StatefulWidget, B extends BaseCubit>
@@ -32,11 +32,14 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
     ..appCubit = appCubit
     ..exceptionHandler = exceptionHandler;
 
-
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => navigator,
+    return MultiProvider(
+      providers: [
+        Provider<AppNavigator>(
+          create: (_) => navigator,
+        ),
+      ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (_) => bloc),

@@ -1,11 +1,10 @@
 import 'package:flutter_config/flutter_config.dart';
 
 class Api {
-  static String KEY = "AD";
+  static String systemKey = "AD";
+  static String baseURL = "${FlutterConfig.get("BASE_URL")}";
 
   ///authentication
-  static String baseURL = "https://api.thachlonghai.co";
-  static String login = "${FlutterConfig.get("BASE_URL")}/account/api/login";
-  static String refresh_token =
-      "${FlutterConfig.get("BASE_URL")}/account/api/refresh_token";
+  static String login = "$baseURL/account/api/login";
+  static String refresh_token = "$baseURL/account/api/refresh_token";
 }
