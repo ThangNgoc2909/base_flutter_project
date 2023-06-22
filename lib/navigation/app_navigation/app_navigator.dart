@@ -3,6 +3,10 @@ import '../../common/constants/duration/duration_constants.dart';
 import '../app_popup_info/app_popup_info.dart';
 import '../app_route_info/app_route_info.dart';
 
+///navigation
+///showDialog
+///showSnackBar
+
 abstract class AppNavigator {
   const AppNavigator();
 
@@ -16,6 +20,7 @@ abstract class AppNavigator {
 
   void navigateToBottomTab(int index, {bool notify = true});
 
+  ///navigation
   Future<T?> push<T extends Object?>(AppRouteInfo appRouteInfo);
 
   Future<void> pushAll(List<AppRouteInfo> listAppRouteInfo);
@@ -35,7 +40,8 @@ abstract class AppNavigator {
     bool useRootNavigator = false,
   });
 
-  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo, {bool useRootNavigator = false});
+  Future<void> popAndPushAll(List<AppRouteInfo> listAppRouteInfo,
+      {bool useRootNavigator = false});
 
   void popUntilRoot({bool useRootNavigator = false});
 
@@ -56,8 +62,10 @@ abstract class AppNavigator {
 
   Future<T?> showGeneralDialog<T extends Object?>(
     AppPopupInfo appPopupInfo, {
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)? transitionBuilder,
-    Duration transitionDuration = DurationConstants.defaultGeneralDialogTransitionDuration,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transitionBuilder,
+    Duration transitionDuration =
+        DurationConstants.defaultGeneralDialogTransitionDuration,
     bool barrierDismissible = true,
     Color barrierColor = const Color(0x80000000),
     bool useRootNavigator = true,
@@ -73,7 +81,23 @@ abstract class AppNavigator {
     Color? backgroundColor,
   });
 
+  ///showSnackBar
   void showErrorSnackBar(String message, {Duration? duration});
 
   void showSuccessSnackBar(String message, {Duration? duration});
+
+  ///showDialog
+  void showSuccessDialog({
+    required BuildContext context,
+    required String content,
+    VoidCallback? accept,
+    VoidCallback? extraAccept,
+    String? mainTitle,
+    String? extraTitle,
+    bool hasButton = true,
+  });
+
+  void showErrorDialog(String message, {Duration? duration});
+
+  void showLoadingDialog(String message);
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:base_project/base/base_cubit/base_cubit.dart';
 import 'package:base_project/features/authentication/data/repository/login_repository.dart';
+import 'package:base_project/navigation/app_route_info/app_route_info.dart';
 import 'package:injectable/injectable.dart';
 import 'login_state.dart';
 
@@ -27,13 +28,15 @@ class LoginCubit extends BaseCubit<LoginState> {
   }
 
   FutureOr onLogin() async {
+    navigator.showLoadingDialog("Đang đăng nhập, vui lòng đợi");
     final res = await _loginRepository.login(state.email, state.password);
+    navigator.pop();
     res.fold(
       (l) {
-        print("lefttt: $l");
+        navigator.showErrorDialog(l.generalServerMessage ?? "");
       },
       (r) {
-        print("right: $r");
+        navigator.replace(const AppRouteInfo.main());
       },
     );
   }

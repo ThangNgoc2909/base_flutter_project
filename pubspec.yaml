@@ -42,6 +42,7 @@ dependencies:
   flutter_screenutil: 5.7.0 #A flutter plugin for adapting screen and font size.Let your UI display a reasonable layout on different screen sizes
   rxdart: ^0.27.7
   json_annotation: ^4.8.1
+  loading_animation_widget: ^1.2.0+4
 
   #local storage
   shared_preferences: ^2.1.1

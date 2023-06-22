@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:base_project/utils/dialog_utils.dart';
 import 'package:base_project/utils/snackbar_utils.dart';
 import 'package:flutter/material.dart' as m;
 import 'package:injectable/injectable.dart';
 import '../../base/base_cubit/mixin/log_mixin.dart';
 import '../../base/base_navigation/base_route_info_mapper.dart';
+import '../../common/constants/app_colors.dart';
 import '../../common/constants/duration/duration_constants.dart';
 import '../../config/log_config.dart';
 import '../../router/app_router.dart';
@@ -333,7 +335,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       _rootRouterContext,
       message,
       duration: duration,
-      // backgroundColor: AppColors.current.primaryColor,
+      backgroundColor: AppColors.red_1,
     );
   }
 
@@ -343,7 +345,43 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
       _rootRouterContext,
       message,
       duration: duration,
-      // backgroundColor: AppColors.current.primaryColor,
+      backgroundColor: AppColors.mainColor,
+    );
+  }
+
+  @override
+  void showErrorDialog(String message, {Duration? duration}) {
+    DialogUtils.showErrorDialog(
+      _rootRouterContext,
+      content: message,
+    );
+  }
+
+  @override
+  void showLoadingDialog(String message) {
+    DialogUtils.showLoadingDialog(
+      _rootRouterContext,
+      message: message,
+    );
+  }
+
+  @override
+  void showSuccessDialog(
+      {required m.BuildContext context,
+      required String content,
+      m.VoidCallback? accept,
+      m.VoidCallback? extraAccept,
+      String? mainTitle,
+      String? extraTitle,
+      bool hasButton = true}) {
+    return DialogUtils.showSuccessDialog(
+      _rootRouterContext,
+      content: content,
+      accept: accept,
+      extraAccept: extraAccept,
+      extraTitle: extraTitle,
+      mainTitle: mainTitle,
+      hasButton: hasButton,
     );
   }
 }

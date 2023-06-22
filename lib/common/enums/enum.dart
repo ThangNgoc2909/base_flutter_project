@@ -1,4 +1,0 @@
-enum AppRoute {
-  login,
-  home,
-}

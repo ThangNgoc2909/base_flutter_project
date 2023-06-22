@@ -12,7 +12,7 @@ class AuthService {
   final NoneAuthAppServerApiClient _noneAuthAppClient;
 
   Future<BaseData<LoginModel>> login(String email, String password) async {
-    return _noneAuthAppClient.request(
+    final response = await _noneAuthAppClient.request(
       method: RestMethod.post,
       path: Api.login,
       body: {
@@ -21,5 +21,10 @@ class AuthService {
         'system_key': Api.systemKey,
       },
     );
+    final value = BaseData<LoginModel>.fromJson(
+      response,
+      (json) => LoginModel.fromJson(json as Map<String, dynamic>),
+    );
+    return value;
   }
 }
