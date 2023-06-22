@@ -45,17 +45,17 @@ class _LoginPageState extends BasePageState<LoginPage, LoginCubit> {
                     width: sp124,
                   ),
                 ),
-                Gap(48.h),
+                Gap(sp48.h),
                 const Text(
                   'Đăng nhập',
                   style: AppTypography.h2,
                   textAlign: TextAlign.start,
                 ),
-                Gap(24.h),
+                Gap(sp24.h),
                 BuildFormLogin(formKey: _loginValidate),
-                Gap(16.h),
+                Gap(sp16.h),
                 const BuildLoginAction(),
-                Gap(38.h),
+                Gap(sp32.h),
                 CommonButton(
                   title: "Đăng nhập",
                   onTap: () {

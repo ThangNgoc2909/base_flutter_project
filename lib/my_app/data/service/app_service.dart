@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../base/base_rest_api/refresh_token_api_client.dart';
 import '../../../base/base_rest_api/rest_api_client.dart';
+import '../../../common/constants/server/api_constants.dart';
 import '../../../dio_config/exceptions/remote/remote_exceptions.dart';
 
 @LazySingleton()
@@ -13,9 +14,9 @@ class RefreshTokenApiService {
   Future<String?> refreshToken(String refreshToken) async {
     try {
       final response = await _refreshTokenApiClient.request(
-        method: RestMethod.post,
-        path: '/v1/auth/refresh',
-      );
+          method: RestMethod.post,
+          path: Api.refresh_token,
+          body: {"refresh": refreshToken});
 
       return response["access"];
     } catch (e) {
@@ -25,7 +26,6 @@ class RefreshTokenApiService {
         throw const RemoteException(
             kind: RemoteExceptionKind.refreshTokenFailed);
       }
-
       rethrow;
     }
   }

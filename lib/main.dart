@@ -7,7 +7,6 @@ import 'my_app/presentation/my_app.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
   await configureInjection();
   await FlutterConfig.loadEnvVariables();
   await runZonedGuarded(_runMyApp, _reportError);

@@ -7,8 +7,6 @@ class RefreshTokenApiClient extends RestApiClient {
   RefreshTokenApiClient(
     AccessTokenInterceptor accessTokenInterceptor,
   ) : super(
-          interceptors: [
-            accessTokenInterceptor,
-          ],
+          interceptors: [accessTokenInterceptor],
         );
 }
