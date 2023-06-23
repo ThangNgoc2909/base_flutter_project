@@ -1,4 +1,4 @@
-import '../../../shared/shared.dart';
+import '../../../base/base_mapper/base_error_response_mapper.dart';
 
 class ResponseMapperConstants {
   const ResponseMapperConstants._();

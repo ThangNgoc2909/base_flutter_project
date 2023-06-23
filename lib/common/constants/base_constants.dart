@@ -1,4 +1,3 @@
-import 'package:flutter_config/flutter_config.dart';
 
 class ServerTimeoutConstants {
   const ServerTimeoutConstants._();

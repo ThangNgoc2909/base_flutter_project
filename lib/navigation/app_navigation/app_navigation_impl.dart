@@ -10,7 +10,6 @@ import '../../common/constants/app_colors.dart';
 import '../../config/log_config.dart';
 import '../../router/app_router.dart';
 import 'app_navigator.dart';
-import '../app_popup_info/app_popup_info.dart';
 import '../app_route_info/app_route_info.dart';
 
 @LazySingleton(as: AppNavigator)
@@ -30,7 +29,6 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
 
   final AppRouter _appRouter;
   final BaseRouteInfoMapper _appRouteInfoMapper;
-  final _popups = <AppPopupInfo>{};
 
   StackRouter? get _currentTabRouter =>
       tabsRouter?.stackRouterOfIndex(currentBottomTab);

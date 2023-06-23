@@ -1,8 +1,12 @@
 import '../../dio_config/exceptions/remote/server_errors.dart';
-import '../../shared/shared.dart';
 import '../base_data_mapper.dart';
 import 'firebase_storage_error_response_mapper.dart';
 import 'json_object_error_response_mapper.dart';
+
+enum ErrorResponseMapperType {
+  jsonObject,
+  firebaseStorage,
+}
 
 /// Dùng để phân loại lỗi trả về dựa theo ErrorResponseMapperType:
 ///

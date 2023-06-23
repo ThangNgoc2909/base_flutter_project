@@ -1,12 +1,9 @@
 import 'package:dartx/dartx.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_config/flutter_config.dart';
-import 'package:injectable/injectable.dart';
 import '../../common/constants/base_constants.dart';
 import '../../common/constants/server/server_constants.dart';
 import '../../dio_config/dio_builder.dart';
 import '../../dio_config/exceptions/exception_mapper/dio_exception_mapper.dart';
-import '../../shared/shared.dart';
 import '../api_client_default_settings.dart';
 import '../base_interceptor.dart';
 import '../base_mapper/base_error_response_mapper.dart';
