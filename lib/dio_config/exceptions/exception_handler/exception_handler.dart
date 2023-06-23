@@ -18,64 +18,54 @@ class ExceptionHandler {
 
     switch (message) {
       case RemoteExceptionKind.noInternet:
-        // TODO: Handle this case.
+        navigator.showErrorDialog(
+          "Hãy truy cập mạng để tiếp tục",
+          duration: const Duration(seconds: 2),
+        );
         break;
       case RemoteExceptionKind.network:
-        // TODO: Handle this case.
+        navigator.showErrorDialog(
+          "Không kết nối được với máy chủ",
+          duration: const Duration(seconds: 2),
+        );
         break;
       case RemoteExceptionKind.serverDefined:
         // TODO: Handle this case.
         break;
       case RemoteExceptionKind.serverUndefined:
-        // TODO: Handle this case.
+        navigator.showErrorDialog(
+          "Máy chủ không phản hồi",
+          duration: const Duration(seconds: 2),
+        );
         break;
       case RemoteExceptionKind.refreshTokenFailed:
-        // TODO: Handle this case.
+        _showErrorRefreshTokenDialog();
         break;
       case RemoteExceptionKind.timeout:
-        // TODO: Handle this case.
+        navigator.showErrorDialog(
+          "Máy chủ không phản hồi",
+          duration: const Duration(seconds: 2),
+        );
         break;
       case RemoteExceptionKind.cancellation:
         // TODO: Handle this case.
         break;
       case RemoteExceptionKind.unknown:
-        // TODO: Handle this case.
+        navigator.showErrorDialog(
+          "Xảy ra lỗi",
+          duration: const Duration(seconds: 2),
+        );
         break;
     }
   }
 
-  void _showErrorSnackBar({
-    required String message,
-    Duration duration = DurationConstants.defaultErrorVisibleDuration,
-  }) {
-    navigator.showErrorSnackBar(message, duration: duration);
-  }
-
-  Future<void> _showErrorDialog({
-    required String message,
-    VoidCallback? onPressed,
-    bool isRefreshTokenFailed = false,
-  }) async {
-    await navigator
-        .showDialog(AppPopupInfo.confirmDialog(
-      message: message,
-      onPressed: onPressed,
-    ))
-        .then((value) {
-      if (isRefreshTokenFailed) {
-        listener.onRefreshTokenFailed();
-      }
-    });
-  }
-
-  Future<void> _showErrorDialogWithRetry({
-    required String message,
-    VoidCallback? onRetryPressed,
-  }) async {
-    await navigator.showDialog(AppPopupInfo.errorWithRetryDialog(
-      message: message,
-      onRetryPressed: onRetryPressed,
-    ));
+  Future<void> _showErrorRefreshTokenDialog() async {
+    navigator.showErrorDialog(
+      "Phiên đăng nhập của bạn đã hết hạn. Hãy đăng nhập lại",
+      duration: const Duration(seconds: 2),
+    );
+    await Future.delayed(const Duration(seconds: 2));
+    listener.onRefreshTokenFailed();
   }
 }
 

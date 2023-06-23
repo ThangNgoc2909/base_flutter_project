@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../base/base_cubit/mixin/log_mixin.dart';
 import '../common/constants/constants.dart';
 
+///Chứa các thông tin chung user accessToken, refreshToken, deviceToken, user...
 @LazySingleton()
 class AppPreferences with LogMixin {
   AppPreferences(this._sharedPreference);
@@ -57,10 +58,6 @@ class AppPreferences with LogMixin {
       token,
     );
     return success;
-  }
-
-  Future<bool> saveIsDarkMode(bool isDarkMode) {
-    return _sharedPreference.setBool(PrefKeys.isDarkMode, isDarkMode);
   }
 
   Future<bool> saveDeviceToken(String token) {

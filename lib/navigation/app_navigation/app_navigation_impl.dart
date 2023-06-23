@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:auto_route/auto_route.dart';
 import 'package:base_project/utils/dialog_utils.dart';
 import 'package:base_project/utils/snackbar_utils.dart';
@@ -6,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import '../../base/base_cubit/mixin/log_mixin.dart';
 import '../../base/base_navigation/base_route_info_mapper.dart';
 import '../../common/constants/app_colors.dart';
-import '../../common/constants/duration/duration_constants.dart';
 import '../../config/log_config.dart';
 import '../../router/app_router.dart';
 import 'app_navigator.dart';
@@ -223,113 +223,6 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  Future<T?> showDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    bool barrierDismissible = true,
-    bool useSafeArea = false,
-    bool useRootNavigator = true,
-  }) {
-    if (_popups.contains(appPopupInfo)) {
-      logD('Dialog $appPopupInfo already shown');
-
-      return Future.value(null);
-    }
-    _popups.add(appPopupInfo);
-
-    return m.showDialog<T>(
-      context: useRootNavigator
-          ? _rootRouterContext
-          : _currentTabContextOrRootContext,
-      builder: (_) => m.WillPopScope(
-        onWillPop: () async {
-          logD('Dialog $appPopupInfo dismissed');
-          _popups.remove(appPopupInfo);
-
-          return Future.value(true);
-        },
-        child: const m.SizedBox(),
-      ),
-      useRootNavigator: useRootNavigator,
-      barrierDismissible: barrierDismissible,
-      useSafeArea: useSafeArea,
-    );
-  }
-
-  @override
-  Future<T?> showGeneralDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    Duration transitionDuration =
-        DurationConstants.defaultGeneralDialogTransitionDuration,
-    m.Widget Function(
-            m.BuildContext, m.Animation<double>, m.Animation<double>, m.Widget)?
-        transitionBuilder,
-    m.Color barrierColor = const m.Color(0x80000000),
-    bool barrierDismissible = true,
-    bool useRootNavigator = true,
-  }) {
-    if (_popups.contains(appPopupInfo)) {
-      logD('Dialog $appPopupInfo already shown');
-
-      return Future.value(null);
-    }
-    _popups.add(appPopupInfo);
-
-    return m.showGeneralDialog<T>(
-      context: useRootNavigator
-          ? _rootRouterContext
-          : _currentTabContextOrRootContext,
-      barrierColor: barrierColor,
-      useRootNavigator: useRootNavigator,
-      barrierDismissible: barrierDismissible,
-      pageBuilder: (
-        m.BuildContext context,
-        m.Animation<double> animation1,
-        m.Animation<double> animation2,
-      ) =>
-          m.WillPopScope(
-        onWillPop: () async {
-          logD('Dialog $appPopupInfo dismissed');
-          _popups.remove(appPopupInfo);
-
-          return Future.value(true);
-        },
-        child: const m.SizedBox(),
-      ),
-      transitionBuilder: transitionBuilder,
-      transitionDuration: transitionDuration,
-    );
-  }
-
-  @override
-  Future<T?> showModalBottomSheet<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    bool isScrollControlled = false,
-    bool useRootNavigator = false,
-    bool isDismissible = true,
-    bool enableDrag = true,
-    m.Color barrierColor = m.Colors.black54,
-    m.Color? backgroundColor,
-  }) {
-    if (LogConfig.enableNavigatorObserverLog) {
-      logD(
-          'showModalBottomSheet $appPopupInfo, useRootNav = $useRootNavigator');
-    }
-
-    return m.showModalBottomSheet<T>(
-      context: useRootNavigator
-          ? _rootRouterContext
-          : _currentTabContextOrRootContext,
-      builder: (_) => const m.SizedBox(),
-      isDismissible: isDismissible,
-      enableDrag: enableDrag,
-      useRootNavigator: useRootNavigator,
-      isScrollControlled: isScrollControlled,
-      backgroundColor: backgroundColor,
-      barrierColor: barrierColor,
-    );
-  }
-
-  @override
   void showErrorSnackBar(String message, {Duration? duration}) {
     SnackBarUtils.showAppSnackBar(
       _rootRouterContext,
@@ -366,7 +259,7 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  void showSuccessDialog(
+  FutureOr showSuccessDialog(
       {required m.BuildContext context,
       required String content,
       m.VoidCallback? accept,

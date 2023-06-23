@@ -71,6 +71,6 @@ abstract class BasePageStateDelegate<T extends StatefulWidget,
 
   @override
   void onRefreshTokenFailed() {
-    // commonBloc.add(const ForceLogoutButtonPressed());
+    commonBloc.onForceLogout();
   }
 }

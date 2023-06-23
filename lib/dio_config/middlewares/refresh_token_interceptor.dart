@@ -29,7 +29,8 @@ class RefreshTokenInterceptor extends BaseInterceptor {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == HttpStatus.unauthorized) {
+    if (err.response?.statusCode == HttpStatus.unauthorized ||
+        err.response?.statusCode == HttpStatus.forbidden) {
       final options = err.response!.requestOptions;
       _onExpiredToken(options, handler);
     } else {

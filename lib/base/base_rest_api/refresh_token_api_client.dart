@@ -6,7 +6,5 @@ import '../../dio_config/middlewares/access_token_interceptor.dart';
 class RefreshTokenApiClient extends RestApiClient {
   RefreshTokenApiClient(
     AccessTokenInterceptor accessTokenInterceptor,
-  ) : super(
-          interceptors: [accessTokenInterceptor],
-        );
+  ) : super(interceptors: [accessTokenInterceptor]);
 }

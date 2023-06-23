@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:base_project/common/constants/app_typography.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ import '../common/widgets/button/main_button.dart';
 class DialogUtils {
   const DialogUtils._();
 
-  static void showSuccessDialog(
+  static FutureOr showSuccessDialog(
     BuildContext context, {
     required String content,
     VoidCallback? accept,
@@ -90,7 +91,7 @@ class DialogUtils {
     );
   }
 
-  static void showErrorDialog(
+  static FutureOr showErrorDialog(
     BuildContext context, {
     required String content,
   }) {
@@ -131,7 +132,7 @@ class DialogUtils {
     );
   }
 
-  static showLoadingDialog(
+  static FutureOr showLoadingDialog(
     BuildContext context, {
     required String message,
   }) {

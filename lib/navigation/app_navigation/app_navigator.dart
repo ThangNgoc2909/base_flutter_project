@@ -1,6 +1,5 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import '../../common/constants/duration/duration_constants.dart';
-import '../app_popup_info/app_popup_info.dart';
 import '../app_route_info/app_route_info.dart';
 
 ///navigation
@@ -53,34 +52,6 @@ abstract class AppNavigator {
 
   bool removeLast();
 
-  Future<T?> showDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    bool barrierDismissible = true,
-    bool useSafeArea = false,
-    bool useRootNavigator = true,
-  });
-
-  Future<T?> showGeneralDialog<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
-        transitionBuilder,
-    Duration transitionDuration =
-        DurationConstants.defaultGeneralDialogTransitionDuration,
-    bool barrierDismissible = true,
-    Color barrierColor = const Color(0x80000000),
-    bool useRootNavigator = true,
-  });
-
-  Future<T?> showModalBottomSheet<T extends Object?>(
-    AppPopupInfo appPopupInfo, {
-    bool isScrollControlled = false,
-    bool useRootNavigator = false,
-    bool isDismissible = true,
-    bool enableDrag = true,
-    Color barrierColor = Colors.black54,
-    Color? backgroundColor,
-  });
-
   ///showSnackBar
   void showErrorSnackBar(String message, {Duration? duration});
 
@@ -97,7 +68,7 @@ abstract class AppNavigator {
     bool hasButton = true,
   });
 
-  void showErrorDialog(String message, {Duration? duration});
+  FutureOr showErrorDialog(String message, {Duration? duration});
 
-  void showLoadingDialog(String message);
+  FutureOr showLoadingDialog(String message);
 }
