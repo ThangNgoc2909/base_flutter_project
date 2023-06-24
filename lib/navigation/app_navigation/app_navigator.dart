@@ -58,7 +58,7 @@ abstract class AppNavigator {
   void showSuccessSnackBar(String message, {Duration? duration});
 
   ///showDialog
-  void showSuccessDialog({
+  FutureOr showSuccessDialog({
     required BuildContext context,
     required String content,
     VoidCallback? accept,

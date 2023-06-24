@@ -9,5 +9,4 @@ enum AppExceptionType {
   parse,
   remoteConfig,
   uncaught,
-  validation,
 }

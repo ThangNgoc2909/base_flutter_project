@@ -241,16 +241,16 @@ class AppNavigatorImpl extends AppNavigator with LogMixin {
   }
 
   @override
-  void showErrorDialog(String message, {Duration? duration}) {
-    DialogUtils.showErrorDialog(
+  FutureOr showErrorDialog(String message, {Duration? duration}) {
+    return DialogUtils.showErrorDialog(
       _rootRouterContext,
       content: message,
     );
   }
 
   @override
-  void showLoadingDialog(String message) {
-    DialogUtils.showLoadingDialog(
+  FutureOr showLoadingDialog(String message) {
+    return DialogUtils.showLoadingDialog(
       _rootRouterContext,
       message: message,
     );
